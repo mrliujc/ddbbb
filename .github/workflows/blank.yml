@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: ImYrS/aliyun-auto-signin@main
         with:
-          REFRESH_TOKENS: ${{ secrets.REFRESH_TOKENS }}
+          REFRESH_TOKENS: ${{ secrets.6260d70375be43b19c5d731360c6c65e }}
           GP_TOKEN: ${{ secrets.GP_TOKEN}}
-          PUSH_TYPES: ''
+          PUSH_TYPES: 'PUSHPLUS'
           SERVERCHAN_SEND_KEY: ${{ secrets.SERVERCHAN_SEND_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
