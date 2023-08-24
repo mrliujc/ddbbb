@@ -1,0 +1,848 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "remote_cf",
+        "address": "https://1.0.0.1/dns-query",
+        "strategy": "prefer_ipv4"
+      },
+      {
+        "tag": "nodedns",
+        "address": "https://doh.pub/dns-query",
+        "address_resolver": "local",
+        "address_strategy": "prefer_ipv4",
+        "strategy": "prefer_ipv4",
+        "detour": "direct"
+      },
+      {
+        "tag": "local",
+        "address": "114.114.114.114",
+        "detour": "direct"
+      },
+      {
+        "tag": "block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": [
+          "any"
+        ],
+        "server": "nodedns"
+      },
+      {
+        "geosite": "cn",
+        "domain_suffix": [
+          "msftconnecttest.com"
+        ],
+        "server": "local"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "local"
+      }
+    ],
+    "strategy": "prefer_ipv4"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "inet4_address": "172.19.0.1/30",
+      "auto_route": true,
+      "strict_route": false,
+      "sniff": true
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "type": "selector",
+      "outbounds": [
+        "auto",
+        "🇮🇳 印度01 | x0.5 | CM1隧道",
+        "🇹🇼 🇨🇳 台湾01 | x1.0 | CM2隧道",
+        "🇭🇰 香港01| x0.7 | CM1隧道",
+        "🇭🇰 香港04 | x1.0 | CM2隧道",
+        "🇯🇵 日本01 | x0.7 | CM1隧道",
+        "🇯🇵 日本02 | x0.7 | CM2隧道",
+        "🇫🇷 法国01 | x0.7 | CM2隧道",
+        "🇺🇸 美国02 | x0.7 | CM2隧道",
+        "🇺🇸 美国03 | x0.5 | CM1隧道",
+        "🇺🇸 美国04 | x1.0 | CM1隧道",
+        "🇬🇧 英国01 | x0.5 | CM1隧道",
+        "🇻🇳 越南01 | x1.0 | CM2隧道",
+        "🇹🇼 🇨🇳 台湾02 | x0.7 | CM1隧道",
+        "国内 ssthy.net | x0.3",
+        "国际 ssthy.com | x0.1",
+        "🇨🇦 加拿大01 | x0.5 | CM2隧道",
+        "🇩🇪 德国01 | x0.7 | CM2隧道",
+        "🇸🇬 新加坡01 | x1.0 | CM2隧道",
+        "🇸🇬 新加坡02 | x0.5 | CM1隧道",
+        "🇹🇭 泰国01 | x1.0 | CM2隧道",
+        "🇦🇺 澳大利亚01 | x0.5 | CM1隧道",
+        "🇲🇾 马来西亚 | x1.2 | CM2隧道 | 原生IP",
+        "🇸🇦 沙特01 | x0.5 | CM1隧道",
+        "🇦🇷 阿根廷01 | x1.0 | CM1隧道",
+        "🇰🇷 韩国01 | x0.7 | CM2隧道",
+        "🇺🇸 美国05 | x0.5 | CM2隧道",
+        "🇵🇭 菲律宾01 | x2.5 | CM1隧道",
+        "🇹🇷 土耳其01 | x1.0 | CM2隧道",
+        "🇧🇷 巴西01 | x0.5 | CM1隧道",
+        "🇮🇹 意大利01 | x0.7 | CM2隧道",
+        "🇸🇬 新加坡01 | x4.0 | IEPL",
+        "🇯🇵 日本02 | x4.0 | IEPL",
+        "🇨🇱 智利02 | x0.35 | CM1隧道",
+        "🇺🇸 美国03 | x4.0 | IEPL",
+        "🇭🇰 香港02 | x1.0 | CM2隧道",
+        "🇭🇰 香港04 | x4.0 | IEPL"
+      ]
+    },
+    {
+      "tag": "netflix",
+      "type": "selector",
+      "outbounds": [
+        "🇹🇼 🇨🇳 台湾01 | x1.0 | CM2隧道",
+        "🇹🇼 🇨🇳 台湾02 | x0.7 | CM1隧道",
+        "🇸🇬 新加坡01 | x1.0 | CM2隧道",
+        "🇸🇬 新加坡02 | x0.5 | CM1隧道",
+        "🇸🇬 新加坡01 | x4.0 | IEPL"
+      ]
+    },
+    {
+      "tag": "speedtest",
+      "type": "selector",
+      "outbounds": [
+        "direct",
+        "proxy"
+      ]
+    },
+    {
+      "tag": "auto",
+      "type": "urltest",
+      "outbounds": [
+        "🇮🇳 印度01 | x0.5 | CM1隧道",
+        "🇹🇼 🇨🇳 台湾01 | x1.0 | CM2隧道",
+        "🇭🇰 香港01| x0.7 | CM1隧道",
+        "🇭🇰 香港04 | x1.0 | CM2隧道",
+        "🇯🇵 日本01 | x0.7 | CM1隧道",
+        "🇯🇵 日本02 | x0.7 | CM2隧道",
+        "🇫🇷 法国01 | x0.7 | CM2隧道",
+        "🇺🇸 美国02 | x0.7 | CM2隧道",
+        "🇺🇸 美国03 | x0.5 | CM1隧道",
+        "🇺🇸 美国04 | x1.0 | CM1隧道",
+        "🇬🇧 英国01 | x0.5 | CM1隧道",
+        "🇻🇳 越南01 | x1.0 | CM2隧道",
+        "🇹🇼 🇨🇳 台湾02 | x0.7 | CM1隧道",
+        "国内 ssthy.net | x0.3",
+        "国际 ssthy.com | x0.1",
+        "🇨🇦 加拿大01 | x0.5 | CM2隧道",
+        "🇩🇪 德国01 | x0.7 | CM2隧道",
+        "🇸🇬 新加坡01 | x1.0 | CM2隧道",
+        "🇸🇬 新加坡02 | x0.5 | CM1隧道",
+        "🇹🇭 泰国01 | x1.0 | CM2隧道",
+        "🇦🇺 澳大利亚01 | x0.5 | CM1隧道",
+        "🇲🇾 马来西亚 | x1.2 | CM2隧道 | 原生IP",
+        "🇸🇦 沙特01 | x0.5 | CM1隧道",
+        "🇦🇷 阿根廷01 | x1.0 | CM1隧道",
+        "🇰🇷 韩国01 | x0.7 | CM2隧道",
+        "🇺🇸 美国05 | x0.5 | CM2隧道",
+        "🇵🇭 菲律宾01 | x2.5 | CM1隧道",
+        "🇹🇷 土耳其01 | x1.0 | CM2隧道",
+        "🇧🇷 巴西01 | x0.5 | CM1隧道",
+        "🇮🇹 意大利01 | x0.7 | CM2隧道",
+        "🇸🇬 新加坡01 | x4.0 | IEPL",
+        "🇯🇵 日本02 | x4.0 | IEPL",
+        "🇨🇱 智利02 | x0.35 | CM1隧道",
+        "🇺🇸 美国03 | x4.0 | IEPL",
+        "🇭🇰 香港02 | x1.0 | CM2隧道",
+        "🇭🇰 香港04 | x4.0 | IEPL"
+      ],
+      "url": "http://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 50
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    },
+    {
+      "tag": "🇮🇳 印度01 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18809,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇹🇼 🇨🇳 台湾01 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18803,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇭🇰 香港01| x0.7 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18801,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇭🇰 香港04 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18806,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "s400l.cmcuct.org"
+        }
+      }
+    },
+    {
+      "tag": "🇯🇵 日本01 | x0.7 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18804,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇯🇵 日本02 | x0.7 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 28804,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇫🇷 法国01 | x0.7 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18816,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇺🇸 美国02 | x0.7 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 38802,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇺🇸 美国03 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 48802,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇺🇸 美国04 | x1.0 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18802,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇬🇧 英国01 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18808,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇻🇳 越南01 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18813,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇹🇼 🇨🇳 台湾02 | x0.7 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18820,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "国内 ssthy.net | x0.3",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 24488,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/download",
+        "headers": {
+          "Host": "us.domain.com"
+        }
+      }
+    },
+    {
+      "tag": "国际 ssthy.com | x0.1",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 24402,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "us.domain.com"
+        }
+      }
+    },
+    {
+      "tag": "🇨🇦 加拿大01 | x0.5 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18819,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇩🇪 德国01 | x0.7 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18814,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇸🇬 新加坡01 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18805,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "sg.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇸🇬 新加坡02 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 28805,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇹🇭 泰国01 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18818,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇦🇺 澳大利亚01 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18806,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇲🇾 马来西亚 | x1.2 | CM2隧道 | 原生IP",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18825,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇸🇦 沙特01 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18815,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇦🇷 阿根廷01 | x1.0 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18810,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇰🇷 韩国01 | x0.7 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18812,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇺🇸 美国05 | x0.5 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18808,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇵🇭 菲律宾01 | x2.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18813,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇹🇷 土耳其01 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18817,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇧🇷 巴西01 | x0.5 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18823,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "www.baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇮🇹 意大利01 | x0.7 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18822,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇸🇬 新加坡01 | x4.0 | IEPL",
+      "type": "vmess",
+      "server": "s500l.cmcuct.org",
+      "server_port": 46806,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "network": "tcp",
+      "transport": {
+        "type": "http",
+        "host": [
+          "s500l.cmcuct.org"
+        ],
+        "path": "/"
+      }
+    },
+    {
+      "tag": "🇯🇵 日本02 | x4.0 | IEPL",
+      "type": "vmess",
+      "server": "s500l.cmcuct.org",
+      "server_port": 46805,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "s500l.cmcuct.org"
+        }
+      }
+    },
+    {
+      "tag": "🇨🇱 智利02 | x0.35 | CM1隧道",
+      "type": "vmess",
+      "server": "e300l.cmcuct.org",
+      "server_port": 18821,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇺🇸 美国03 | x4.0 | IEPL",
+      "type": "vmess",
+      "server": "s500l.cmcuct.org",
+      "server_port": 46804,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "network": "tcp",
+      "transport": {
+        "type": "http",
+        "host": [
+          "s500l.cmcuct.org"
+        ],
+        "path": "/"
+      }
+    },
+    {
+      "tag": "🇭🇰 香港02 | x1.0 | CM2隧道",
+      "type": "vmess",
+      "server": "s400l.cmcuct.org",
+      "server_port": 18826,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/hls",
+        "headers": {
+          "Host": "baidu.com"
+        }
+      }
+    },
+    {
+      "tag": "🇭🇰 香港04 | x4.0 | IEPL",
+      "type": "vmess",
+      "server": "s500l.cmcuct.org",
+      "server_port": 46801,
+      "uuid": "a03b4934-f688-3489-8d1d-38046929a387",
+      "security": "auto",
+      "alter_Id": 0,
+      "packet_encoding": "xudp",
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "s500l.cmcuct.org"
+        }
+      }
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "port": 53,
+        "outbound": "dns-out"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "direct"
+      },
+      {
+        "geoip": [
+          "private",
+          "cn"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "geosite": "cn",
+        "domain_suffix": [
+          "msftconnecttest.com",
+          "doppiocdn.com",
+          "tpkcz.icu",
+          "pixeldrain.com"
+        ],
+        "outbound": "direct"
+      },
+      {
+        "domain_keyword": [
+          "speedtest"
+        ],
+        "domain_suffix": [
+          "cdnst.net",
+          "ziffstatic.com"
+        ],
+        "outbound": "speedtest"
+      },
+      {
+        "geosite": "netflix",
+        "outbound": "netflix"
+      }
+    ],
+    "auto_detect_interface": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "default_mode": "rule",
+      "store_selected": true
+    }
+  }
+}
